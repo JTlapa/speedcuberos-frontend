@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import RecordsSection from '../components/RecordsSection';
 import Login from './Login';
 import Register from './Register';
+import AdminDashboard from './AdminDashboard';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,14 +17,14 @@ export default function Home() {
     const savedUser = localStorage.getItem('user');
     if (savedToken && savedUser) {
       setIsAuthenticated(true);
-      setCurrentUser(JSON.stringify(savedUser));
+      setCurrentUser(JSON.parse(savedUser));
     }
   }, []);
 
   const handleLoginSuccess = (user) => {
     setIsAuthenticated(true);
     setCurrentUser(user);
-    setShowLoginModal(false); // Cerramos el modal tras el éxito
+    setShowLoginModal(false);
   };
 
   const handleLogout = () => {
@@ -36,6 +37,9 @@ export default function Home() {
     setShowLoginModal(false);
     setShowRegisterModal(true);
   };
+  if (isAuthenticated && currentUser && currentUser.rol === 'admin') {
+    return <AdminDashboard onLogout={handleLogout} />;
+  }
 
   return (
     <div className="bg-brand-bg min-h-screen font-sans flex flex-col justify-between">
