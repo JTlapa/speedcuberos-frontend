@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #0f2537;       
+  --color-brand-accent: #1fd195;  
+  --color-brand-bg: #dbe2e9;        
+  --color-brand-card-bg: #0f2537;   
+}
