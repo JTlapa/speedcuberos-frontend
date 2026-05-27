@@ -97,7 +97,6 @@ export default function RecordsSection() {
                     topRecords.map((record, index) => (
                         <div key={record.id_record} className="bg-brand-card-bg text-white p-4 rounded-lg shadow flex items-center justify-between">
                             <div className="flex items-center space-x-4">
-                                { }
                                 <div className={`h-8 w-8 flex items-center justify-center rounded-full text-sm font-bold text-brand-dark ${index === 0 ? 'bg-amber-400' : index === 1 ? 'bg-slate-300' : 'bg-amber-600'
                                     }`}>
                                     {index + 1}

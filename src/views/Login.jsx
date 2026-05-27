@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function Login({ onLoginSuccess, onCancel }) {
+export default function Login({ onLoginSuccess, onCancel, onSwitchToRegister }) {
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -38,7 +38,7 @@ export default function Login({ onLoginSuccess, onCancel }) {
             if (err.response && err.response.data) {
                 setError(err.response.data.message);
             } else {
-                setError('No se pudo conectar con el servidor. Revisa tu backend.');
+                setError('No se pudo conectar con el servidor.');
             }
         } finally {
             setLoading(false);
@@ -79,7 +79,7 @@ export default function Login({ onLoginSuccess, onCancel }) {
                         <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">Contraseña</label>
                         <div className="relative">
                             <input
-                                type={showPassword ? "text" : "password"} // 🚨 Cambia dinámicamente
+                                type={showPassword ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="••••••••••••"
@@ -113,7 +113,7 @@ export default function Login({ onLoginSuccess, onCancel }) {
                 </form>
 
                 <div className="bg-slate-900/40 px-8 py-4 border-t border-gray-800/60 text-center">
-                    <p className="text-[11px] text-gray-500">¿No tienes cuenta? <span className="text-brand-accent hover:underline cursor-pointer font-semibold">Regístrate aquí</span></p>
+                    <p className="text-[11px] text-gray-500">¿No tienes cuenta? <span onClick={onSwitchToRegister} className="text-brand-accent hover:underline cursor-pointer font-semibold">Regístrate aquí</span></p>
                 </div>
 
             </div>

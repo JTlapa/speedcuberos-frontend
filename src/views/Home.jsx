@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import RecordsSection from '../components/RecordsSection';
 import Login from './Login';
+import Register from './Register';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {
@@ -30,6 +32,10 @@ export default function Home() {
     setIsAuthenticated(false);
     setCurrentUser(null);
   };
+  const handleSwitchToRegister = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(true);
+  };
 
   return (
     <div className="bg-brand-bg min-h-screen font-sans flex flex-col justify-between">
@@ -48,7 +54,7 @@ export default function Home() {
               }
             </p>
             {!isAuthenticated && (
-              <button className="bg-brand-accent text-brand-dark font-bold text-xs px-6 py-3 rounded-full shadow hover:bg-emerald-500 transition-colors">
+              <button onClick={() => setShowRegisterModal(true)} className="bg-brand-accent text-brand-dark font-bold text-xs px-6 py-3 rounded-full shadow hover:bg-emerald-500 transition-colors">
                 Crear tu cuenta ahora
               </button>
             )}
@@ -129,7 +135,12 @@ export default function Home() {
         </div>
       </footer>
       {showLoginModal && (
-        <Login onLoginSuccess={handleLoginSuccess} onCancel={() => setShowLoginModal(false)} />
+        <Login onLoginSuccess={handleLoginSuccess} onCancel={() => setShowLoginModal(false)} onSwitchToRegister={handleSwitchToRegister} />
+      )}
+      {showRegisterModal && (
+        <Register onRegisterSuccess={() => { setShowRegisterModal(false); setShowLoginModal(true); }} 
+          onCancel={() => setShowRegisterModal(false)} 
+        />
       )}
     </div>
   );
