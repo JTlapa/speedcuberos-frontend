@@ -113,7 +113,7 @@ export default function AdminDashboard({ onLogout }) {
         fecha: newRecord.fecha_registro
       }, config);
 
-      setSuccess('El competidor y su récord se registraron correctamente.');
+      setSuccess('El récord se registró correctamente.');
 
       setNewRecord({
         nombre_completo: '', edad: '', pais: '', red_social: '', tiempo_segundos: '',
