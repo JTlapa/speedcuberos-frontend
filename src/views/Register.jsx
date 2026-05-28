@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 export default function Register({ onRegisterSuccess, onCancel }) {
   const [nombreCompleto, setNombreCompleto] = useState('');
@@ -25,7 +26,7 @@ export default function Register({ onRegisterSuccess, onCancel }) {
     try {
       setLoading(true);
       
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post(`${API_BASE_URL}/auth/register`, {
         id_rol: 2,
         nombre_completo: nombreCompleto,
         correo,

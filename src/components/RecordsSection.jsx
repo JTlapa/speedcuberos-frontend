@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 export default function RecordsSection() {
     const [categories, setCategories] = useState([]);
@@ -8,7 +9,7 @@ export default function RecordsSection() {
     const [startIndex, setStartIndex] = useState(0);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/categories')
+        axios.get(`${API_BASE_URL}/categories`)
             .then(res => {
                 setCategories(res.data);
                 if (res.data.length > 0) {
@@ -20,7 +21,7 @@ export default function RecordsSection() {
 
     useEffect(() => {
         if (selectedCategory) {
-            axios.get(`http://localhost:5000/api/records/categories/${selectedCategory.id_categoria}/top3`)
+            axios.get(`${API_BASE_URL}/records/categories/${selectedCategory.id_categoria}/top3`)
                 .then(res => setTopRecords(res.data))
                 .catch(err => console.error("Error cargando podio:", err));
         }

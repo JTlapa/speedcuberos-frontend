@@ -4,6 +4,7 @@ import RecordsSection from '../components/RecordsSection';
 import Login from './Login';
 import Register from './Register';
 import AdminDashboard from './AdminDashboard';
+import { API_BASE_URL } from '../config';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 export default function Login({ onLoginSuccess, onCancel, onSwitchToRegister }) {
     const [correo, setCorreo] = useState('');
@@ -20,7 +21,7 @@ export default function Login({ onLoginSuccess, onCancel, onSwitchToRegister }) 
 
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
+            const response = await axios.post(`${API_BASE_URL}/auth/login`, {
                 correo,
                 password
             });
