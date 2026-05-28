@@ -113,7 +113,7 @@ export default function AdminDashboard({ onLogout }) {
         fecha: newRecord.fecha_registro
       }, config);
 
-      setSuccess('¡Excelente! El competidor fue inscrito y su récord se asignó correctamente.');
+      setSuccess('El competidor y su récord se registraron correctamente.');
 
       setNewRecord({
         nombre_completo: '', edad: '', pais: '', red_social: '', tiempo_segundos: '',
@@ -310,7 +310,7 @@ export default function AdminDashboard({ onLogout }) {
                     type="text"
                     value={newRecord.lugar_competencia}
                     onChange={(e) => setNewRecord({ ...newRecord, lugar_competencia: e.target.value })}
-                    placeholder="Ej. Veracruz, Mexico"
+                    placeholder="Ej. Mexico"
                     className="w-full bg-slate-900/60 border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-accent"
                   />
                 </div>
@@ -343,7 +343,7 @@ export default function AdminDashboard({ onLogout }) {
                 <tbody className="text-xs divide-y divide-gray-800/50">
                   {records.length === 0 ? (
                     <tr>
-                      <td colSpan="4" className="p-4 text-center text-gray-500 font-medium">No existen récords registrados en esta categoría aún.</td>
+                      <td colSpan="4" className="p-4 text-center text-gray-500 font-medium">No existen récords registrados en esta categoría de cubos.</td>
                     </tr>
                   ) : (
                     records.map((rec) => (
