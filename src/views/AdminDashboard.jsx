@@ -81,7 +81,6 @@ export default function AdminDashboard({ onLogout }) {
     setError('');
     setSuccess('');
 
-    // 1. Agrega la validación de que no vayan vacíos
     if (!newRecord.nombre_completo || !newRecord.edad || !newRecord.pais || !newRecord.tiempo_segundos || !newRecord.nombre_competencia || !newRecord.lugar_competencia) {
       setError('Por favor, llena todos los campos obligatorios del competidor, el tiempo y la competencia.');
       return;
@@ -92,7 +91,6 @@ export default function AdminDashboard({ onLogout }) {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      // 🚀 PASO 1: Registrar al Competidor (Igual que antes)
       const competitorResponse = await axios.post(`${API_BASE_URL}/competitors`, {
         nombre_completo: newRecord.nombre_completo,
         edad: Number(newRecord.edad),
@@ -106,22 +104,20 @@ export default function AdminDashboard({ onLogout }) {
         throw new Error('No se pudo recuperar el ID del competidor creado.');
       }
 
-      // 🚀 PASO 2: Registrar el Récord inyectando la info de la competencia
       await axios.post(`${API_BASE_URL}/records`, {
         id_competidor: Number(nuevoCompetidorId),
         id_categoria: Number(selectedCategory),
         tiempo_segundos: Number(newRecord.tiempo_segundos),
-        nombre_competencia: newRecord.nombre_competencia, // 🚨 MANDADO AL BACK
-        lugar_competencia: newRecord.lugar_competencia,   // 🚨 MANDADO AL BACK
+        nombre_competencia: newRecord.nombre_competencia,
+        lugar_competencia: newRecord.lugar_competencia,  
         fecha: newRecord.fecha_registro
       }, config);
 
       setSuccess('¡Excelente! El competidor fue inscrito y su récord se asignó correctamente.');
 
-      // Reseteamos todo el estado limpio (incluyendo los campos nuevos)
       setNewRecord({
         nombre_completo: '', edad: '', pais: '', red_social: '', tiempo_segundos: '',
-        nombre_competencia: '', lugar_competencia: '', // 🚨 Limpiados
+        nombre_competencia: '', lugar_competencia: '',
         fecha_registro: new Date().toISOString().split('T')[0]
       });
 
